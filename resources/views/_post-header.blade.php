@@ -3,14 +3,6 @@
         Latest <span class="text-blue-500">Laravel From Scratch</span> News
     </h1>
 
-    <h2 class="inline-flex mt-2">By Lary Laracore <img src="{{ asset('images/lary-head.svg') }}"
-            alt="Head of Lary the mascot"></h2>
-
-    <p class="text-sm mt-14">
-        Another year. Another update. We're refreshing the popular Laravel series with new content.
-        I'm going to keep you guys up to speed with what's going on!
-    </p>
-
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative lg:inline-flex items-center bg-gray-100 rounded-xl">
@@ -35,12 +27,6 @@
                     {{ Str::ucfirst($category->name) }}
                 </x-dropdown-item>
 
-                    {{-- <a href="{{ url('categories/' . $category->slug) }}"
-                        class="block text-left px-3 text-sm leading-6 hover:bg-blue-500 focus:bg-blue-500 hover:text-white focus:text-white
-                        {{ isset($activeCategory) && $activeCategory->is($category) ? 'bg-blue-500 text-white' : '' }}">
-
-                        {{ Str::ucfirst($category->name) }}
-                    </a> --}}
                 @endforeach
 
             </x-dropdown>
@@ -48,7 +34,7 @@
         </div>
 
         <!-- Other Filters -->
-        <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+        {{-- <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
             <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
                 <option value="category" disabled selected>Other Filters
                 </option>
@@ -67,13 +53,14 @@
                     </path>
                 </g>
             </svg>
-        </div>
+        </div> --}}
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
                 <input type="text" name="search" placeholder="Find something"
-                    class="bg-transparent placeholder-black font-semibold text-sm">
+                    class="bg-transparent placeholder-black font-semibold text-sm"
+                    value="{{ request('search') }}">
             </form>
         </div>
     </div>

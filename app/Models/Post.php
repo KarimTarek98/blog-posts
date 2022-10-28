@@ -20,4 +20,13 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function scopeSearch($q, array $filters)
+    {
+        $q->when($filters['search'] ?? false,
+            fn($q, $search) =>
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%')
+        );
+    }
 }
