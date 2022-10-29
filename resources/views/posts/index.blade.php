@@ -26,6 +26,8 @@
         <p>Sorry, there is no posts published yet.</p>
         @endif
 
+        {{ $posts->links() }}
+
        {{-- <div class="lg:grid lg:grid-cols-3">
 
 

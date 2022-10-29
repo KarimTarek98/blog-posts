@@ -25,9 +25,10 @@ class Post extends Model
     {
         $q->when($filters['search'] ?? false,
             fn($q, $search) =>
-                $q->where('title', 'like', '%' . $search . '%')
-                    ->orWhere('body', 'like', '%' . $search . '%')
-        );
+                $q->where(fn($query) =>
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%'))
+    );
 
         $q->when($filters['category'] ?? false, fn($query, $category) =>
 
