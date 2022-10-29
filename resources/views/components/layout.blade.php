@@ -16,7 +16,17 @@
             </div>
 
             <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+                @auth
+                <span class="text-xs font-bold uppercase">Welcome, {{ Auth::user()->username }}</span>
+
+                <form action="{{ url('/logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+                @else
+                <a href="{{ url('/register') }}" class="text-xs font-bold uppercase">Register</a>
+                <a href="{{ url('/login') }}" class="ml-3 text-xs font-bold uppercase">Login</a>
+                @endauth
 
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
@@ -54,4 +64,6 @@
             </div>
         </footer>
     </section>
+
+    <x-flash />
 </body>
