@@ -22,7 +22,7 @@
 
                 @foreach ($categories as $category)
 
-                <x-dropdown-item href="{{ url('categories/' . $category->slug) }}"
+                <x-dropdown-item href="/?category={{ $category->slug }}" 
                     :active="isset($activeCategory) && $activeCategory->is($category) ? 'bg-blue-500 text-white' : ''">
                     {{ Str::ucfirst($category->name) }}
                 </x-dropdown-item>
