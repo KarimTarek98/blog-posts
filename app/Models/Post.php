@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'excerpt', 'body'];
 
     public function category()
     {
@@ -39,5 +38,10 @@ class Post extends Model
             $query->whereHas('author', fn($q) => $q->where('username', $author))
         );
 
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
