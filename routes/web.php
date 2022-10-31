@@ -24,3 +24,16 @@ Route::middleware('guest')->group(function () {
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
+
+Route::middleware('admin')->group(function () {
+
+    Route::prefix('admin')->group(function () {
+
+        Route::controller(PostController::class)->group(function() {
+            Route::get('/posts/create', 'create');
+            Route::post('/posts/store', 'store');
+        });
+
+    });
+});
+
