@@ -4,6 +4,8 @@ use Illuminate\Support\Str;
 
 return [
 
+    'subscribe_success' => 'You\'re now subscribed to our blog',
+
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver

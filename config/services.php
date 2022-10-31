@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'mailchimp' => [
+        'key' => env('MAILCHIMP_KEY'),
+        'lists' => [
+            'subscribers' => env('SUBSCRIBERS_LIST_ID')
+        ],
+        'subscription_error' => 'You can\'t subscribe with that email'
+    ]
+
 ];
