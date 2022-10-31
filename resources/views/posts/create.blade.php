@@ -1,6 +1,6 @@
 <x-layout>
     <section class="px-6 py-8">
-        <form method="POST" action="{{ url('admin/posts/store') }}">
+        <form method="POST" action="{{ url('admin/posts/store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-6">
@@ -68,6 +68,18 @@
                 </select>
 
                 @error('category')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="thumbnail">
+                    Post Thumb
+                </label>
+
+                <input type="file" name="thumbnail" id="thumbnail" />
+
+                @error('body')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                 @enderror
             </div>

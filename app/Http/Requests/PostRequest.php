@@ -21,6 +21,7 @@ class PostRequest extends FormRequest
             'slug' => ['required', 'unique:posts,slug'],
             'excerpt' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
+            'thumbnail' => ['required', 'image', 'mimes:png,jpg'],
             'category_id' => ['required', 'exists:categories,id']
         ];
     }
