@@ -1,5 +1,5 @@
 <x-layout>
-    <section class="px-6 py-8">
+    <x-default-form-post breadcrumb="Add New Post">
         <form method="POST" action="{{ url('admin/posts/store') }}" enctype="multipart/form-data">
             @csrf
 
@@ -29,5 +29,5 @@
 
             <x-primary-submit-btn>Publish</x-primary-submit-btn>
         </form>
-    </section>
+    </x-default-form-post>
 </x-layout>

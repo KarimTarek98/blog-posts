@@ -15,14 +15,21 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
+            <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                <span class="text-xs font-bold uppercase">Welcome, {{ Auth::user()->username }}</span>
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</button>
+                    </x-slot>
 
-                <form action="{{ url('/logout') }}" method="POST">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
+                    <x-dropdown-item href="{{ url('admin/posts') }}" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
+                    <x-dropdown-item href="{{ url('admin/posts/create') }}" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                    <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
+
+                    <form id="logout-form" method="POST" action="/logout" class="hidden">
+                        @csrf
+                    </form>
+                </x-dropdown>
                 @else
                 <a href="{{ url('/register') }}" class="text-xs font-bold uppercase">Register</a>
                 <a href="{{ url('/login') }}" class="ml-3 text-xs font-bold uppercase">Login</a>

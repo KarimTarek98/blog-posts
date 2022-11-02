@@ -26,25 +26,4 @@ class PostController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return view('posts.create', [
-            'categories' => Category::all()
-        ]);
-    }
-
-    public function store(PostRequest $request)
-    {
-
-        Post::create([
-            'category_id' => $request->category_id,
-            'user_id' => Auth::id(),
-            'slug' => str_replace(' ', '-', strtolower($request->slug)),
-            'title' => $request->title,
-            'excerpt' => $request->excerpt,
-            'body' => $request->body,
-            'thumbnail' => 'storage/' . $request->file('thumbnail')->store('thumbnail')
-        ]);
-        return redirect('/');
-    }
 }

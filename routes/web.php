@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -29,9 +30,15 @@ Route::middleware('admin')->group(function () {
 
     Route::prefix('admin')->group(function () {
 
-        Route::controller(PostController::class)->group(function() {
+        Route::controller(AdminPostController::class)->group(function () {
+
+            Route::get('/posts', 'index')->name('dashboard');
             Route::get('/posts/create', 'create');
             Route::post('/posts/store', 'store');
+            Route::get('/posts/{post}/edit', 'edit');
+            Route::patch('/posts/{post}', 'update');
+            Route::delete('/posts/{post}', 'destroy');
+
         });
 
     });
