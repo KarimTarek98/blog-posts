@@ -33,7 +33,7 @@ class AdminPostController extends Controller
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'body' => $request->body,
-            'thumbnail' => 'storage/' . $request->file('thumbnail')->store('thumbnail')
+            'thumbnail' => 'storage/' . $this->storeThumbnail($request)
         ]);
         return redirect('/');
     }
@@ -54,14 +54,19 @@ class AdminPostController extends Controller
             'excerpt' => $request->excerpt,
             'body' => $request->body,
             'category_id' => $request->category_id,
-            'thumbnail' => 'storage/' . $request->file('thumbnail')->store('thumbnail')
+            'thumbnail' => 'storage/' . $this->storeThumbnail($request)
         ]);
-        return redirect()->route('dashboard');
+        return redirect('admin/posts')->with('success', 'Post Updated');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
         return back()->with('success', 'Post Deleted!');
+    }
+
+    protected function storeThumbnail($request)
+    {
+        return $request->file('thumbnail')->store('thumbnail');
     }
 }
