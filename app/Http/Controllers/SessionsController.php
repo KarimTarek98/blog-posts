@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Services\UserService;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Auth;
-
 
 class SessionsController extends Controller
 {

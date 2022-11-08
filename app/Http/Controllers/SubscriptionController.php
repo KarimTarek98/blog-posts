@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscribeRequest;
 use App\Services\Subscription;
+use App\Traits\ThrowableException;
 use Illuminate\Validation\ValidationException;
 
 class SubscriptionController extends Controller
 {
+    use ThrowableException;
     public function __invoke(Subscription $subscriber, SubscribeRequest $request)
     {
         try
@@ -16,9 +18,7 @@ class SubscriptionController extends Controller
         }
         catch (\Exception $e)
         {
-            throw ValidationException::withMessages([
-                'email' => config('services.mailchimp.subscription_error')
-            ]);
+            return $this->throwValidationException(config('services.mailchimp.subscription_error'));
         }
 
         return redirect('/')

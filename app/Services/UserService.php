@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Services;
+use App\Traits\ThrowableException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class UserService
 {
+    use ThrowableException;
     public function login($request)
     {
         if (! Auth::attempt($request->validated()))
         {
-            throw ValidationException::withMessages([
-                'email' => 'Your credentials must match our records'
-            ]);
+            return $this->throwValidationException('Your credentials must match our records');
         }
 
         $request->session()->regenerate();
