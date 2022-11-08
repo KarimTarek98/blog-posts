@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Traits\StorablePostThumb;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPostController extends Controller
 {
+    use StorablePostThumb;
     public function index()
     {
         return view('admin.posts.index', [
@@ -33,7 +35,7 @@ class AdminPostController extends Controller
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'body' => $request->body,
-            'thumbnail' => 'storage/' . $this->storeThumbnail($request)
+            'thumbnail' => 'storage/' . $this->storeThumbnail($request, 'thumbnail')
         ]);
         return redirect('/');
     }
@@ -54,7 +56,7 @@ class AdminPostController extends Controller
             'excerpt' => $request->excerpt,
             'body' => $request->body,
             'category_id' => $request->category_id,
-            'thumbnail' => 'storage/' . $this->storeThumbnail($request)
+            'thumbnail' => 'storage/' . $this->storeThumbnail($request, 'thumbnail')
         ]);
         return redirect('admin/posts')->with('success', 'Post Updated');
     }
@@ -63,10 +65,5 @@ class AdminPostController extends Controller
     {
         $post->delete();
         return back()->with('success', 'Post Deleted!');
-    }
-
-    protected function storeThumbnail($request)
-    {
-        return $request->file('thumbnail')->store('thumbnail');
     }
 }

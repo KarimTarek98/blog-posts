@@ -1,6 +1,6 @@
 <x-layout>
     <x-default-form-post breadcrumb="Add New Post">
-        <form method="POST" action="{{ url('admin/posts/store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('admin/posts') }}" enctype="multipart/form-data">
             @csrf
 
             <x-form.input name="title" />
