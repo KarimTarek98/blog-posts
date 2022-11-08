@@ -2,39 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Services\UserService;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+
 
 class SessionsController extends Controller
 {
+
+    public function __construct(public UserService $user)
+    {
+    }
 
     public function create()
     {
         return view('sessions.create');
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email', 'exists:users,email'],
-            'password' => ['required']
-        ]);
-
-        if (! Auth::attempt($credentials))
-        {
-            throw ValidationException::withMessages([
-                'email' => 'Your credentials must match our records'
-            ]);
-        }
-
-        $request->session()->regenerate();
-        return redirect('/')->with('success', 'You\'re now Logged in');
+        return $this->user->login($request);
     }
 
     public function destroy()
     {
-        Auth::logout();
-        return redirect('/')->with('success', 'Goodbye!');
+        return $this->user->logout();
     }
 }

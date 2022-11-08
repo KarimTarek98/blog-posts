@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\SessionsController;
 use App\Models\User;
 use App\Services\Subscription;
+use App\Services\UserService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
